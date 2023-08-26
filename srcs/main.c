@@ -6,19 +6,15 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 00:01:26 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/23 20:19:12 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/26 18:55:19 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	int		can_move;
-}				t_vars;
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-void	put_square(int x, int y, t_data *img)
+void	put_square(int x, int y, t_img *img)
 {
 	int i;
 	int j;
@@ -36,56 +32,63 @@ void	put_square(int x, int y, t_data *img)
 	}
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-int test_move(int x, int y, t_vars *vars)
+int test_move(int x, int y, t_cube *data)
 {
-	t_data	img;
+	t_img	img;
 	
-	if (vars->can_move)
+	if (data->can_move)
 	{
-		img.img = mlx_new_image(vars->mlx, 1020, 1080);
+		img.img = mlx_new_image(data->mlx, 1920, 1080);
 		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 									&img.endian);
 		put_square(x, y, &img);
-		mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
-		mlx_destroy_image(vars->mlx, img.img);
+		mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
+		mlx_destroy_image(data->mlx, img.img);
 	}
+	return (0);
 }
 
-int test_click(int i, int x, int y, t_vars *vars)
+int test_click(int i, int x, int y, t_cube *data)
 {
-	vars->can_move = 1;
-	write(1, "click\n", 6);
+	(void) i;
+	(void) x;
+	(void) y;
+	data->can_move = 1;
+	write(2, "click\n", 6);
+	return (0);
 }
 
-int test_release(int i, int x, int y, t_vars *vars)
+int test_release(int i, int x, int y, t_cube *data)
 {
-	vars->can_move = 0;
-	write(1, "relache\n", 8);
+	(void) i;
+	(void) x;
+	(void) y;
+	data->can_move = 0;
+	write(2, "relache\n", 8);
+	return (0);
+
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	t_vars	vars;
-
-	vars.can_move = 0;
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1020, 1080, "Hello world!");
-	// img.img = mlx_new_image(mlx, 1920, 1080);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-	// 							&img.endian);
-	// put_square(&img);
-	// //my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_hook(vars.win, ON_MOUSEMOVE, 1L<<6, test_move, &vars);
-	mlx_hook(vars.win, 4, 1L<<2, test_click, &vars);
-	mlx_hook(vars.win, 5, 1L<<3, test_release, &vars);
-	mlx_loop(vars.mlx);
+	t_cube	data;
+	
+	if (ac != 2)
+		return (printf("not good arguments\n"), 1);
+	parse_file(av[1], &data);
+	data.can_move = 0;
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");
+	mlx_hook(data.win, ON_MOUSEMOVE, 1L<<6, test_move, &data);
+	mlx_hook(data.win, 4, 1L<<2, test_click, &data);
+	mlx_hook(data.win, 5, 1L<<3, test_release, &data);
+	mlx_loop(data.mlx);
 }
