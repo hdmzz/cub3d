@@ -70,8 +70,8 @@ typedef struct s_img
 typedef struct	s_cube {
 	void	*mlx;
 	void	*win;
-	t_map	*map;
-	t_perso	*perso;
+	t_map	map;
+	t_perso	perso;
 	t_img	north_img;
 	t_img	south_img;
 	t_img	east_img;
@@ -95,6 +95,6 @@ int	get_identifier(char *line);
 void set_ressource(int fd, t_cube *data);
 
 //set_map.c
-void set_map(int fd, t_cube *data);
+void set_map(int fd, char *name_file, t_cube *data);
 
 #endif

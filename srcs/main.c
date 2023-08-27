@@ -90,5 +90,5 @@ int	main(int ac, char **av)
 	mlx_hook(data.win, ON_MOUSEMOVE, 1L<<6, test_move, &data);
 	mlx_hook(data.win, 4, 1L<<2, test_click, &data);
 	mlx_hook(data.win, 5, 1L<<3, test_release, &data);
-	mlx_loop(data.mlx);
+	// mlx_loop(data.mlx);
 }

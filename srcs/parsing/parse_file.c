@@ -21,5 +21,5 @@ void parse_file(char *name_file, t_cube *data)
 	if (fd == -1)
 		return (ft_printf("Error on acces to file\n"), exit(1));
 	set_ressource(fd, data);
-	set_map(fd, data);
+	set_map(fd, name_file, data);
 }
