@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/27 19:14:38 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:51:40 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,8 @@ void	verif_map(t_cube *data);
 //DISPLAY
 //put_minimap.c
 void	put_minimap(t_cube *data);
+
+//put_all_map.c
+void	put_all_map(t_cube *data);
 
 #endif
