@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:52:44 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/26 20:38:36 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:20:22 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void set_ressource(int fd, t_cube *data)
 	line = get_next_line(fd);
 	while (line && num_elem < 6)
 	{
-		// printf("%s\n", line);
+		// ft_printf("%s\n", line);
 		if (!ft_same_str(line, ""))
 		{
 			verif_and_stock_ressource(line, data);
@@ -37,7 +37,7 @@ void set_ressource(int fd, t_cube *data)
 		line = get_next_line(fd);
 	}
 	if (num_elem != 6)
-		return (printf("Not enough ressouces\n"), exit(1));
+		return (ft_printf("Not enough ressouces\n"), exit(1));
 }
 
 static void	verif_and_stock_ressource(char *line, t_cube *data)
@@ -47,7 +47,7 @@ static void	verif_and_stock_ressource(char *line, t_cube *data)
 	(void) data;
 	ident = get_identifier(line);
 	if (ident == -1)
-		return (printf("Not good identifier\n"), exit(1));
+		return (ft_printf("Not good identifier\n"), exit(1));
 	if (ident == NO || ident == SO || ident == EA || ident == WE)
 		do_img_ressource(ident, line, data);
 	else if (ident == F)
@@ -64,9 +64,9 @@ static void	do_img_ressource(int ident, char *line, t_cube *data)
 	size = 100;
 	img_file = get_name_img_file(line);
 	if (!img_file)
-		return (printf("Not good file\n"), exit(1));
+		return (ft_printf("Not good file\n"), exit(1));
 	// if (!correct_file(img_file))
-	// 	return (printf("Not good file\n"), exit(1));
+	// 	return (ft_printf("Not good file\n"), exit(1));
 	if (ident == NO)
 		data->north_img.img = mlx_xpm_file_to_image(data->mlx, img_file, &size, &size);
 	if (ident == SO)
@@ -105,11 +105,11 @@ static void	do_color_ressource(char *line, int color[3])
 		color[ind] = ft_atoi(&line[i]);
 		ft_printf("color %d %d\n", ind, color[ind]);
 		if (!ft_isdigit(line[i]))
-			return (printf("Not good format for color\n"), exit(1));
+			return (ft_printf("Not good format for color\n"), exit(1));
 		while(ft_isdigit(line[i]))
 			i++;
 		if (line[i] != ',' && line[i] != '\0')
-			return (printf("Not good format for color\n"), exit(1));
+			return (ft_printf("Not good format for color\n"), exit(1));
 		i++;
 		ind++;
 	}

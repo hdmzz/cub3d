@@ -6,7 +6,7 @@
 #    By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 21:43:34 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/08/26 20:09:06 by ajakubcz         ###   ########.fr        #
+#    Updated: 2023/08/27 18:56:01 by ajakubcz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,15 @@ LIBFT = libft/libft.a
 LIBMLX = mlx_linux/libmlx.a
 DIR_SRCS = srcs/
 DIR_PARSING = $(DIR_SRCS)parsing/
+DIR_DISPLAY = $(DIR_SRCS)display/
 SRCS =	$(DIR_SRCS)main.c \
 		$(DIR_SRCS)utils.c \
 		$(DIR_PARSING)parse_file.c \
 		$(DIR_PARSING)utils_parse.c \
 		$(DIR_PARSING)set_ressource.c \
-		$(DIR_PARSING)set_map.c
+		$(DIR_PARSING)set_map.c \
+		$(DIR_PARSING)verif_map.c \
+		$(DIR_DISPLAY)put_minimap.c
 		
 HEADER = cub3d.h
 

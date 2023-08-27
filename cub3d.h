@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/26 20:30:14 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:14:38 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define SIZE_TILE 100
 
+# include <math.h>
 # include <fcntl.h> //open
 # include <unistd.h> //close et sleep
 # include <mlx.h>
@@ -54,7 +55,7 @@ typedef struct s_point {
 }				t_point;
 
 typedef struct s_perso {
-	t_point	*pos;
+	int		pos[2];
 	int 	orientation;
 }				t_perso;
 
@@ -81,6 +82,9 @@ typedef struct	s_cube {
 	int		can_move;
 }				t_cube;
 
+//main.c
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
 //utils.c
 int	ft_same_str(char *s1, char *s2);
 
@@ -96,5 +100,14 @@ void set_ressource(int fd, t_cube *data);
 
 //set_map.c
 void set_map(int fd, char *name_file, t_cube *data);
+void	print_map(char **map); //TO DELETE
+
+//verif_map.c
+void	verif_map(t_cube *data);
+
+
+//DISPLAY
+//put_minimap.c
+void	put_minimap(t_cube *data);
 
 #endif

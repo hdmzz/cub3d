@@ -6,26 +6,26 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:55:56 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/26 20:57:34 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:20:42 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 void	get_map_size(int fd, t_map *map);
-void	fill_map(char *name_file, t_map *map);
+void	store_map(char *name_file, t_map *map);
 char	*go_to_first_line(int fd);
 char	*fill_line(char *line, t_map *map);
 
-void	print_map(t_cube *data)
+void	print_map(char **map)
 {
 	int i;
 
 	i = 0;
 	ft_printf("------------------PRINT MAP------------------\n");
-	while(data->map.map[i])
+	while(map[i])
 	{
-		ft_printf("%s\n", data->map.map[i]);
+		ft_printf("%s\n", map[i]);
 		i++;
 	}
 }
@@ -36,8 +36,9 @@ void set_map(int fd, char *name_file, t_cube *data)
 	get_map_size(fd, &data->map);
 	ft_printf("hauteur : %d largeur : %d\n", data->map.height, data->map.width);
 	close(fd);
-	fill_map(name_file, &data->map);
-	print_map(data);
+	store_map(name_file, &data->map);
+	print_map(data->map.map);
+	verif_map(data);
 }
 
 void	get_map_size(int fd, t_map *map)
@@ -58,7 +59,7 @@ void	get_map_size(int fd, t_map *map)
 		if ((int) ft_strlen(line) > map->width)
 			map->width = ft_strlen(line);
 		map->height++;
-		ft_printf("%s\n", line);
+		// ft_printf("%s\n", line);
 		line = get_next_line(fd);
 	}
 	while (line)
@@ -69,7 +70,7 @@ void	get_map_size(int fd, t_map *map)
 	}
 }
 
-void	fill_map(char *name_file, t_map *map)
+void	store_map(char *name_file, t_map *map)
 {
 	int		fd;
 	char	*line;
