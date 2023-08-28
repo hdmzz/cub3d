@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 00:01:26 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/27 21:50:43 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/28 20:21:17 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int	main(int ac, char **av)
 	data.can_move = 0;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");
-	// put_minimap(&data);
-	put_all_map(&data);
+	display_windows(&data);
 	mlx_hook(data.win, ON_MOUSEMOVE, 1L<<6, test_move, &data);
 	mlx_hook(data.win, 4, 1L<<2, test_click, &data);
 	mlx_hook(data.win, 5, 1L<<3, test_release, &data);

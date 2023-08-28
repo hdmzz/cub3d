@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+         #
+#    By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 21:43:34 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/08/27 21:49:47 by ajakubcz         ###   ########.fr        #
+#    Updated: 2023/08/28 17:22:18 by ajakubcz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS =	$(DIR_SRCS)main.c \
 		$(DIR_PARSING)set_map.c \
 		$(DIR_PARSING)verif_map.c \
 		$(DIR_DISPLAY)put_minimap.c \
-		$(DIR_DISPLAY)put_all_map.c
+		$(DIR_DISPLAY)put_all_map.c \
+		$(DIR_DISPLAY)display_windows.c
 		
 HEADER = cub3d.h
 
