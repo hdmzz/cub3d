@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/02 21:43:34 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/08/28 17:22:18 by ajakubcz         ###   ########.fr        #
+#    Created: 2023/08/29 17:26:09 by ajakubcz          #+#    #+#              #
+#    Updated: 2023/08/29 17:26:11 by ajakubcz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ DIR_SRCS = srcs/
 DIR_PARSING = $(DIR_SRCS)parsing/
 DIR_DISPLAY = $(DIR_SRCS)display/
 SRCS =	$(DIR_SRCS)main.c \
+		$(DIR_SRCS)hook.c \
 		$(DIR_SRCS)utils.c \
 		$(DIR_PARSING)parse_file.c \
 		$(DIR_PARSING)utils_parse.c \

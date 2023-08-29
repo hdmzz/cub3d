@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 00:01:26 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/28 20:21:17 by ajakubcz         ###   ########.fr       */
+/*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
+/*   Updated: 2023/08/29 17:27:33 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int test_move(int x, int y, t_cube *data)
 {
 	t_img	img;
 	
-	if (data->can_move)
+	if (data->mouse_press)
 	{
 		img.img = mlx_new_image(data->mlx, 1920, 1080);
 		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
@@ -59,7 +59,7 @@ int test_click(int i, int x, int y, t_cube *data)
 	(void) i;
 	(void) x;
 	(void) y;
-	data->can_move = 1;
+	data->mouse_press = 1;
 	write(2, "click\n", 6);
 	return (0);
 }
@@ -69,7 +69,7 @@ int test_release(int i, int x, int y, t_cube *data)
 	(void) i;
 	(void) x;
 	(void) y;
-	data->can_move = 0;
+	data->mouse_press = 0;
 	write(2, "relache\n", 8);
 	return (0);
 }
@@ -81,12 +81,14 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (printf("not good arguments\n"), 1);
 	parse_file(av[1], &data);
-	data.can_move = 0;
+	data.mouse_press = 0;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");
+	// mlx_do_key_autorepeaton(data.mlx);
 	display_windows(&data);
 	mlx_hook(data.win, ON_MOUSEMOVE, 1L<<6, test_move, &data);
 	mlx_hook(data.win, 4, 1L<<2, test_click, &data);
 	mlx_hook(data.win, 5, 1L<<3, test_release, &data);
+	init_hook(&data);
 	mlx_loop(data.mlx);
 }

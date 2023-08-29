@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/28 17:23:20 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:12:13 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_point {
 
 typedef struct s_perso {
 	int		pos[2];
+	float		pix_pos[2];
 	int 	orientation;
 }				t_perso;
 
@@ -79,14 +80,20 @@ typedef struct	s_cube {
 	t_img	west_img;
 	int		ceil_color[3];
 	int		floor_color[3];
-	int		can_move;
+	int		mouse_press;
+	int		key_press[4];
+	int		keycode;
 }				t_cube;
 
 //main.c
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+//hook.c
+void	init_hook(t_cube *data);
+
 //utils.c
-int	ft_same_str(char *s1, char *s2);
+int		ft_same_str(char *s1, char *s2);
+int		colision(t_cube *data);
 
 //PARSING
 //parse_file.c
