@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/29 17:12:13 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:58:32 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct	s_cube {
 	int		ceil_color[3];
 	int		floor_color[3];
 	int		mouse_press;
-	int		key_press[4];
+	int		key_press[6];
 	int		keycode;
 }				t_cube;
 
