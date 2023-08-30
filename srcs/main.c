@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/29 17:27:33 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:20:48 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (printf("not good arguments\n"), 1);
 	parse_file(av[1], &data);
+	data.perso.orientation = 0;
 	data.mouse_press = 0;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");

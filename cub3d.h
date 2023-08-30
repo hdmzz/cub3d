@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/30 14:58:32 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:59:39 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_point {
 typedef struct s_perso {
 	int		pos[2];
 	float		pix_pos[2];
+	float	vect_dir[2];
 	int 	orientation;
 }				t_perso;
 
@@ -82,7 +83,6 @@ typedef struct	s_cube {
 	int		floor_color[3];
 	int		mouse_press;
 	int		key_press[6];
-	int		keycode;
 }				t_cube;
 
 //main.c
