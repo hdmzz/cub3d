@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:51:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/29 17:26:57 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:06:24 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@ void	put_map(t_img *img, t_cube *data);
 void	put_perso(t_img *img);
 void	put_pixel(t_img *img, int x, int y, t_cube *data);
 char	get_char_of_pos(t_cube *data, int x, int y);
+void	get_diff(float diff[2], t_cube *data, int x, int y);
 
 void	put_minimap(t_cube *data, t_img *img)
 {
 	(void) data;
+	float diff[2];
 	//puts("TEST");
+
+	diff[0] = 0;
+	diff[1] = 0;
+	data->perso.orientation = 45;
+	get_diff(diff, data, 110,60);
 	put_circle(img);
 	put_map(img, data);
 	put_perso(img);
@@ -97,6 +104,8 @@ void	put_map(t_img *img, t_cube *data)
 	int		y;
 	float	dist;
 	
+
+	
 	y = 0;
 	while (y < 220)
 	{
@@ -132,11 +141,30 @@ void	put_pixel(t_img *img, int x, int y, t_cube *data)
 
 char	get_char_of_pos(t_cube *data, int x, int y)
 {
-	if ((y + data->perso.pix_pos[1] - 160) < 0 || (y + data->perso.pix_pos[1] - 160) >= data->map.height * 15)
+	float diff[2];
+	// int point[2];
+	
+	diff[0] = 0;
+	diff[1] = 0;
+	// get_diff(diff, data, x, y);
+	if ((y + data->perso.pix_pos[1] - diff[1] - 160) < 0 || (y + data->perso.pix_pos[1] - diff[1] - 160) >= data->map.height * 15)
 		return (0);
-	else if ((x + data->perso.pix_pos[0] - 110) < 0 || (x + data->perso.pix_pos[0] - 110) >= data->map.width * 15)
+	else if ((x + data->perso.pix_pos[0] + diff[0] - 110) < 0 || (x + data->perso.pix_pos[0] + diff[0] - 110) >= data->map.width * 15)
 		return (0);
 	else 
-		return (data->map.map[(int) (y + data->perso.pix_pos[1] - 160) / 15]\
-							 [(int) (x + data->perso.pix_pos[0] - 110) / 15]);
+		return (data->map.map[(int) (y + data->perso.pix_pos[1] - diff[1] - 160) / 15]\
+							 [(int) (x + data->perso.pix_pos[0] + diff[0] - 110) / 15]);
+}
+
+void	get_diff(float diff[2], t_cube *data, int x, int y)
+{
+	float rad;
+	float hyp;
+
+	hyp = sqrt(pow((x - 110), 2) + pow((y - 160), 2));
+
+	rad = data->perso.orientation * (M_PI / 180);
+	diff[1] = cosf(rad) * hyp;
+	diff[0] = sinf(rad) * hyp;
+	// printf("diff %f %f %f %f %f\n", diff[0], diff[1], cosf(rad), sinf(rad), hyp);
 }

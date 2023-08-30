@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/29 17:24:58 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:18:40 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int press(int keycode, t_cube *data)
 	if (keycode == 100)
 		data->key_press[3] = 1;
 	data->keycode = keycode;
-	ft_printf("press %d\n", keycode);
+	// ft_printf("press %d\n", keycode);
 	return (0);
 }
 
@@ -65,7 +65,7 @@ static int unpress(int keycode, t_cube *data)
 		data->key_press[2] = 0;
 	if (keycode == 100)
 		data->key_press[3] = 0;
-	ft_printf("unpress %d\n", keycode);
+	// ft_printf("unpress %d\n", keycode);
 	return (0);
 }
 
