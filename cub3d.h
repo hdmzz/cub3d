@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/30 16:59:39 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:52:35 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_cube {
 	int		floor_color[3];
 	int		mouse_press;
 	int		key_press[6];
+	float	center_north[2];
 }				t_cube;
 
 //main.c
@@ -94,6 +95,9 @@ void	init_hook(t_cube *data);
 //utils.c
 int		ft_same_str(char *s1, char *s2);
 int		colision(t_cube *data);
+
+//utils_mlx.c
+void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2]);
 
 //PARSING
 //parse_file.c

@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:52:44 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 13:13:16 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:53:00 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,23 @@ static void	verif_and_stock_ressource(char *line, t_cube *data)
 
 static void	do_img_ressource(int ident, char *line, t_cube *data)
 {
-	char	*img_file;
+	char	*file;
 	int		s;
 
 	s = 100;
-	img_file = get_name_img_file(line);
-	if (!img_file)
+	file = get_name_img_file(line);
+	if (!file)
 		return (ft_printf("Not good file\n"), exit(1));
-	// if (!correct_file(img_file))
+	// if (!correct_file(file))
 	// 	return (ft_printf("Not good file\n"), exit(1));
 	if (ident == NO)
-		data->north_img.img = mlx_xpm_file_to_image(data->mlx, img_file, &s, &s);
+		data->north_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
 	if (ident == SO)
-		data->south_img.img = mlx_xpm_file_to_image(data->mlx, img_file, &s, &s);
+		data->south_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
 	if (ident == WE)
-		data->west_img.img = mlx_xpm_file_to_image(data->mlx, img_file, &s, &s);
+		data->west_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
 	if (ident == EA)
-		data->east_img.img = mlx_xpm_file_to_image(data->mlx, img_file, &s, &s);
+		data->east_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
 }
 
 static char	*get_name_img_file(char *line)

@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:51:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 12:45:32 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:54:09 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	put_perso(t_img *img);
 void	put_pixel(t_img *img, int x, int y, t_cube *data);
 char	get_char_of_pos(t_cube *data, int x, int y);
 void	get_diff(float diff[2], t_cube *data, int x, int y);
+void	put_north(t_img *img, t_cube *data);
 
 void	put_minimap(t_cube *data, t_img *img)
 {
 	put_circle(img);
 	put_map(img, data);
 	put_perso(img);
-	// put_north(img);
+	put_north(img, data);
 }
 
 void	put_circle(t_img *img)
@@ -140,4 +141,46 @@ void	get_diff(float diff[2], t_cube *data, int x, int y)
 	diff[0] = point[0];
 	diff[1] = point[1];
 	//printf("diff %f %f %d %d %f %f\n", diff[0], diff[1], x , y, vec_AC[0], vec_AC[1]);
+}
+
+void	get_north_pos(float pos[2], t_cube *data, int x, int y)
+{
+	float	rad;
+	float	vec_1[2];
+	float	vec_2[2];
+
+	vec_1[0] = x - 110;
+	vec_1[1] = y - 110;
+	rad = data->perso.orientation * (M_PI / 180);
+	vec_2[0] = vec_1[0] * cosf(rad) - vec_1[1] * sinf(rad);
+	vec_2[1] = vec_1[0] * sinf(rad) + vec_1[1] * cosf(rad);
+	pos[0] = 110 - vec_2[0];
+	pos[1] = 110 + vec_2[1];
+}
+
+void	put_north(t_img *img, t_cube *data)
+{
+	int x;
+	int y;
+	int dist;
+	get_north_pos(data->center_north, data, 110, 9);
+	// ft_printf("center north : %d %d\n", center_north[0], center_north[1]);
+	y = data->center_north[1] - 10;
+	while (y < data->center_north[1] + 10)
+	{
+		x = data->center_north[0] - 10;
+		while (x < data->center_north[0] + 10)
+		{
+			// ft_printf("coords %d %d\n", x, y);
+			dist = sqrt(pow((x - data->center_north[0]), 2) + pow((y - data->center_north[1]), 2));
+			if (dist <= 9)
+			{
+				// ft_printf("coords %d %d\n", x, y);
+				my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
+			}
+			x++;
+		}
+		y++;
+	}
+	//mlx_string_put(data->mlx, img, center_north[0], center_north[1], 0xFF00FF, "NNNNNNNNNNNN");
 }

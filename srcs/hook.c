@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 13:03:10 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:32:41 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,26 @@ int	is_keypress(int key_press[6])
 	return (0);
 }
 
+void	check_colision(t_cube *data)
+{
+	float stock_pos;
+
+	stock_pos = data->perso.pix_pos[0] + data->perso.vect_dir[0];
+	// printf("%f %f %d %d %c\n", stock_pos / 15, data->perso.pix_pos[1] / 15, (int) stock_pos / 15, (int) data->perso.pix_pos[1] / 15, data->map.map[(int)stock_pos / 15][(int)data->perso.pix_pos[1] / 15]);
+	if (data->map.map[(int) data->perso.pix_pos[1] / 15][(int) stock_pos / 15] != '1')
+		data->perso.pix_pos[0] += data->perso.vect_dir[0];
+	stock_pos = data->perso.pix_pos[1] + data->perso.vect_dir[1];
+	if (data->map.map[(int)stock_pos / 15][(int)data->perso.pix_pos[0] / 15] != '1')
+		data->perso.pix_pos[1] += data->perso.vect_dir[1];
+}
+
 static int	loop(t_cube *data)
 {
 	//w : 119 | a : 97 | s : 115 | d : 100
 	if (data->key_press[0] || data->key_press[1] || data->key_press[2] || data->key_press[3])
 	{
 		change_vect_dir(data, data->key_press);
-		data->perso.pix_pos[0] += data->perso.vect_dir[0];
-		data->perso.pix_pos[1] += data->perso.vect_dir[1];
+		check_colision(data);
 	}
 	if (data->key_press[4])
 	{

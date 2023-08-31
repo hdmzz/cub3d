@@ -6,7 +6,7 @@
 #    By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/29 17:26:09 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/08/29 17:26:11 by ajakubcz         ###   ########.fr        #
+#    Updated: 2023/08/31 17:12:11 by ajakubcz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DIR_DISPLAY = $(DIR_SRCS)display/
 SRCS =	$(DIR_SRCS)main.c \
 		$(DIR_SRCS)hook.c \
 		$(DIR_SRCS)utils.c \
+		$(DIR_SRCS)utils_mlx.c \
 		$(DIR_PARSING)parse_file.c \
 		$(DIR_PARSING)utils_parse.c \
 		$(DIR_PARSING)set_ressource.c \

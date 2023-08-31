@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:55:56 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 13:17:28 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:35:13 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	get_map_size(int fd, t_map *map)
 {
 	char	*line;
 
-	puts("test");
 	map->height = 0;
 	map->width = 0;
-	puts("test");
 	line = get_next_line(fd);
 	while (line && ft_same_str(line, ""))
 	{
