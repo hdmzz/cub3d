@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:55:56 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/28 20:25:58 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:17:28 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ void	store_map(char *name_file, t_map *map);
 char	*go_to_first_line(int fd);
 char	*fill_line(char *line, t_map *map);
 
-void	print_map(char **map)
+void	print_map(char **map) //TO_DELETE
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_printf("------------------PRINT MAP------------------\n");
-	while(map[i])
+	while (map[i])
 	{
 		ft_printf("%s\n", map[i]);
 		i++;
 	}
 }
 
-void set_map(int fd, char *name_file, t_cube *data)
+void	set_map(int fd, char *name_file, t_cube *data)
 {
 	ft_printf("hauteur : %d largeur : %d\n", 0, 0);
 	get_map_size(fd, &data->map);
@@ -43,7 +43,7 @@ void set_map(int fd, char *name_file, t_cube *data)
 
 void	get_map_size(int fd, t_map *map)
 {
-	char *line;
+	char	*line;
 
 	puts("test");
 	map->height = 0;
@@ -82,7 +82,7 @@ void	store_map(char *name_file, t_map *map)
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	line = go_to_first_line(fd);
 	printf("first map line : %s\n", line);
-	while(line && !ft_same_str(line, ""))
+	while (line && !ft_same_str(line, ""))
 	{
 		map->map[num_line] = fill_line(line, map);
 		//if (!map->map[num_line])
@@ -92,14 +92,13 @@ void	store_map(char *name_file, t_map *map)
 	}
 	map->map[num_line] = NULL;
 	//verif si num_line correspond à map->height
-
 }
 
 char	*go_to_first_line(int fd)
 {
 	char	*line;
 	int		num_elem;
-	
+
 	num_elem = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -116,8 +115,8 @@ char	*go_to_first_line(int fd)
 
 char	*fill_line(char *line, t_map *map)
 {
-	char *to_return;
-	int i;
+	char	*to_return;
+	int		i;
 
 	to_return = ft_strdup(line);
 	i = ft_strlen(line);
@@ -128,23 +127,3 @@ char	*fill_line(char *line, t_map *map)
 	}
 	return (to_return);
 }
-
-// void	get_map(char *name_file)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	int		num_elem;
-	
-// 	num_elem = 0;
-// 	fd = open(name_file, O_RDONLY);
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		if (!ft_same_str(line, ""))
-// 			num_elem++;
-// 		// ft_printf("%d", num_elem);
-// 		if (num_elem > 6)
-// 			ft_printf("%s\n", line);
-// 		line = get_next_line(fd);
-// 	}
-// }

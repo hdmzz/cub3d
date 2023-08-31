@@ -6,15 +6,15 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/30 17:51:58 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:03:10 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int press(int keycode, t_cube *data);
-static int unpress(int keycode, t_cube *data);
-static int loop(t_cube *data);
+static int	press(int keycode, t_cube *data);
+static int	unpress(int keycode, t_cube *data);
+static int	loop(t_cube *data);
 
 void	init_hook(t_cube *data)
 {
@@ -24,22 +24,20 @@ void	init_hook(t_cube *data)
 	data->key_press[3] = 0;
 	data->key_press[4] = 0;
 	data->key_press[5] = 0;
-	mlx_hook(data->win, ON_KEYDOWN, 1L<<0, press, data);
-	mlx_hook(data->win, ON_KEYUP, 1L<<1, unpress, data);
+	mlx_hook(data->win, ON_KEYDOWN, 1L << 0, press, data);
+	mlx_hook(data->win, ON_KEYUP, 1L << 1, unpress, data);
 	mlx_loop_hook(data->mlx, loop, data);
 }
 
-static int press(int keycode, t_cube *data)
+//w : 119 | a : 97 | s : 115 | d : 100 | left : 65361 | right : 65363
+static int	press(int keycode, t_cube *data)
 {
-	(void) keycode;
-	(void) data;
-	
-	if (keycode == 65307) //esc
+	if (keycode == 65307)
 	{
 		//faut free mon reuf;
 		exit(1);
 	}
-	//w : 119 | a : 97 | s : 115 | d : 100 | left : 65361 | right : 65363
+	// ft_printf("press %d\n", keycode);
 	if (keycode == 119)
 		data->key_press[0] = 1;
 	if (keycode == 97)
@@ -52,15 +50,12 @@ static int press(int keycode, t_cube *data)
 		data->key_press[4] = 1;
 	if (keycode == 65363)
 		data->key_press[5] = 1;
-	// ft_printf("press %d\n", keycode);
 	return (0);
 }
 
-static int unpress(int keycode, t_cube *data)
+static int	unpress(int keycode, t_cube *data)
 {
-	(void) keycode;
-	(void) data;
-
+	// ft_printf("unpress %d\n", keycode);
 	if (keycode == 119)
 		data->key_press[0] = 0;
 	if (keycode == 97)
@@ -73,7 +68,6 @@ static int unpress(int keycode, t_cube *data)
 		data->key_press[4] = 0;
 	if (keycode == 65363)
 		data->key_press[5] = 0;
-	// ft_printf("unpress %d\n", keycode);
 	return (0);
 }
 
@@ -81,10 +75,10 @@ void	add_vect_dir(t_cube *data, int orientation)
 {
 	float	vect_to_add[2];
 	int		basic_vect[2];
-	float		rad;
+	float	rad;
 
 	basic_vect[0] = 0;
-	basic_vect[1] = 1;	
+	basic_vect[1] = 1;
 	if (orientation >= 360)
 		orientation -= 360;
 	rad = orientation * (M_PI / 180);
@@ -110,7 +104,7 @@ void	change_vect_dir(t_cube *data, int *key_press)
 
 int	is_keypress(int key_press[6])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)
@@ -122,32 +116,26 @@ int	is_keypress(int key_press[6])
 	return (0);
 }
 
-static int loop(t_cube *data)
+static int	loop(t_cube *data)
 {
 	//w : 119 | a : 97 | s : 115 | d : 100
-	int *key_press;
-	
-	key_press = data->key_press;
-	if (key_press[0] || key_press[1] || key_press[2] || key_press[3])
+	if (data->key_press[0] || data->key_press[1] || data->key_press[2] || data->key_press[3])
 	{
-		change_vect_dir(data, key_press);
+		change_vect_dir(data, data->key_press);
 		data->perso.pix_pos[0] += data->perso.vect_dir[0];
 		data->perso.pix_pos[1] += data->perso.vect_dir[1];
-		// display_windows(data);
 	}
 	if (data->key_press[4])
 	{
 		data->perso.orientation -= 1;
 		if (data->perso.orientation <= 360)
 			data->perso.orientation += 360;
-		// display_windows(data);	
 	}
 	if (data->key_press[5])
 	{
 		data->perso.orientation += 1;
 		if (data->perso.orientation >= 360)
 			data->perso.orientation -= 360;
-		// display_windows(data);	
 	}
 	if (is_keypress(data->key_press))
 		display_windows(data);

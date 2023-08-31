@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:00:04 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/27 18:49:23 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:09:34 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	verif_if_close(t_map *map, t_perso *perso);
 char	**copy(t_map *map);
 int		can_fill(char c);
 void	fill_map(char **cp_map, int x, int y, t_map *map);
-int verif_around(char **cp_map, int y, int x, t_map *map);
+int		verif_around(char **cp_map, int y, int x, t_map *map);
 
 void	verif_map(t_cube *data)
 {
@@ -28,8 +28,8 @@ void	verif_map(t_cube *data)
 
 void	get_pos_perso(t_map *map, t_perso *perso)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < map->width)
@@ -40,7 +40,7 @@ void	get_pos_perso(t_map *map, t_perso *perso)
 			if (map->map[y][x] == 'N' || map->map[y][x] == 'S' || \
 				map->map[y][x] == 'E' || map->map[y][x] == 'W')
 				return (set_perso(perso, map->map[y][x], x, y));
-			y++;	
+			y++;
 		}
 		x++;
 	}
@@ -64,10 +64,10 @@ void	set_perso(t_perso *perso, char orientation, int x, int y)
 
 void	verif_if_close(t_map *map, t_perso *perso)
 {
-	char **cp_map;
-	int	x;
-	int	y;
-	
+	char	**cp_map;
+	int		x;
+	int		y;
+
 	x = 0;
 	cp_map = copy(map);
 	fill_map(cp_map, perso->pos[0], perso->pos[1], map);
@@ -78,15 +78,15 @@ void	verif_if_close(t_map *map, t_perso *perso)
 		while (y < map->height)
 		{
 			if (cp_map[y][x] == 'F' && !verif_around(cp_map, y, x, map))
-				return(ft_printf("Error map not close\n"), exit(1));
+				return (ft_printf("Error map not close\n"), exit(1));
 			y++;
 		}
-		x++;	
+		x++;
 	}
 	// free_all(cp_map);
 }
 
-int verif_around(char **cp_map, int y, int x, t_map *map)
+int	verif_around(char **cp_map, int y, int x, t_map *map)
 {
 	if (x == 0 || y == 0 || x == map->width -1 || y == map->height - 1)
 		return (0);
@@ -97,11 +97,10 @@ int verif_around(char **cp_map, int y, int x, t_map *map)
 	return (1);
 }
 
-
 char	**copy(t_map *map)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 	char	**cp_map;
 
 	cp_map = malloc(sizeof(char *) * (map->height + 1));
