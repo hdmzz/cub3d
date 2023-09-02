@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 13:06:40 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/01 21:03:12 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	initiate_data(t_cube *data);
 
 void	put_square(int x, int y, t_img *img)
 {
@@ -28,14 +30,6 @@ void	put_square(int x, int y, t_img *img)
 		}
 		i++;
 	}
-}
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
 }
 
 int	test_move(int x, int y, t_cube *data)
@@ -79,9 +73,9 @@ int	main(int ac, char **av)
 	t_cube	data;
 
 	if (ac != 2)
-		return (printf("not good arguments\n"), 1);
+		return (printf("Not good arguments\n"), 1);
+	initiate_data(&data);
 	parse_file(av[1], &data);
-	data.mouse_press = 0;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");
 	display_windows(&data);
@@ -90,4 +84,17 @@ int	main(int ac, char **av)
 	mlx_hook(data.win, 5, 1L << 3, test_release, &data);
 	init_hook(&data);
 	mlx_loop(data.mlx);
+}
+
+void	initiate_data(t_cube *data)
+{
+	data->north_img.img = NULL;
+	data->south_img.img = NULL;
+	data->east_img.img = NULL;
+	data->west_img.img = NULL;
+	data->ceil_color[0] = -1;
+	data->floor_color[0] = -1;
+	data->mouse_press = 0;
+	data->center_north[0] = 0;
+	data->center_north[1] = 0;
 }

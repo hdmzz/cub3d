@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_ressource.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:52:44 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 16:53:00 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/01 21:01:10 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	set_ressource(int fd, t_cube *data)
 		}
 		if (num_elem == 6)
 			break ;
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	if (num_elem != 6)
 		return (ft_printf("Not enough ressouces\n"), exit(1));
 }
@@ -45,9 +47,9 @@ static void	verif_and_stock_ressource(char *line, t_cube *data)
 	int	ident;
 
 	(void) data;
-	ident = get_identifier(line);
+	ident = get_identifier(line, data);
 	if (ident == -1)
-		return (ft_printf("Not good identifier\n"), exit(1));
+		return (free(line), ft_printf("Not good identifier\n"), exit(1));
 	if (ident == NO || ident == SO || ident == EA || ident == WE)
 		do_img_ressource(ident, line, data);
 	else if (ident == F)
@@ -63,10 +65,9 @@ static void	do_img_ressource(int ident, char *line, t_cube *data)
 
 	s = 100;
 	file = get_name_img_file(line);
-	if (!file)
-		return (ft_printf("Not good file\n"), exit(1));
-	// if (!correct_file(file))
-	// 	return (ft_printf("Not good file\n"), exit(1));
+	ft_printf("file : %s\n", file);
+	if (!file) // || !correct_file(file)
+		return (ft_printf("Error not good file\n"), exit(1));
 	if (ident == NO)
 		data->north_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
 	if (ident == SO)
@@ -83,13 +84,13 @@ static char	*get_name_img_file(char *line)
 	int		i;
 
 	i = 0;
-	while (ft_isalpha(line[i]))
+	while (ft_isalpha(line[i])) //skip the identifier
 		i++;
-	i++;
+	while (line[i] == ' ')
+		i++;
 	if (ft_strlen(&line[i]) == 0)
 		return (NULL);
-	img_file = ft_strdup(&line[i]);
-	//free(line);
+	img_file = &line[i];
 	return (img_file);
 }
 
@@ -103,15 +104,16 @@ static void	do_color_ressource(char *line, int color[3])
 	while (ind < 3)
 	{
 		color[ind] = ft_atoi(&line[i]);
+		if (color[ind] < 0 || color[ind] > 255)
+			return (ft_printf("Not good format for color\n"), free(line), exit(1));
 		ft_printf("color %d %d\n", ind, color[ind]);
 		if (!ft_isdigit(line[i]))
-			return (ft_printf("Not good format for color\n"), exit(1));
+			return (ft_printf("Not good format for color\n"), free(line), exit(1));
 		while (ft_isdigit(line[i]))
 			i++;
 		if (line[i] != ',' && line[i] != '\0')
-			return (ft_printf("Not good format for color\n"), exit(1));
+			return (ft_printf("Not good format for color\n"), free(line), exit(1));
 		i++;
 		ind++;
 	}
-	//verif if each int is between 0 and 255
 }
