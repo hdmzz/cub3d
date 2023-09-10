@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 16:43:41 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/10 22:37:51 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:13:54 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void get_precise_dist(t_cube *data, float point[2]);
 double get_angle(int num_rayon, float rotation, t_cube *data);
 void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img);
 int good_char(char c);
-int col_rayon(t_cube *data, float point[2], int preci);
+int col_rayon(t_cube *data, float point[2], float preci);
 
 void	put_sphere2(t_img *img, float point[2])
 {
@@ -60,14 +60,14 @@ void	put_recasting(t_cube *data, t_img *img)
 }
 void	set_wall_face(t_cube *data, float point[2])
 {
-	if (!good_char(data->map.map[(int) (point[1] + 0.01) / 15][(int) point[0] / 15]))
+	if (!good_char(data->map.map[(int) (point[1] + 0.1) / 15][(int) point[0] / 15]))
 		data->wall_face = SO;
-	else if (!good_char(data->map.map[(int) (point[1] - 0.01) / 15][(int) point[0] / 15]))
+	else if (!good_char(data->map.map[(int) (point[1] - 0.1) / 15][(int) point[0] / 15]))
 		data->wall_face = NO;
-	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] + 0.01) / 15]))
+	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] + 0.1) / 15]))
 		data->wall_face = EA;
-	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] - 0.01) / 15]))
-		data->wall_face = WE;	
+	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] - 0.1) / 15]))
+		data->wall_face = WE;
 	else
 		data->wall_face = -1;
 }
@@ -125,6 +125,11 @@ double get_dist(int num_rayon, float rotation, t_cube *data, t_img *img)
 
 void get_precise_dist(t_cube *data, float point[2])
 {
+	while (!col_rayon(data, point, 0.1))
+	{
+		point[0] += data->perso.front_vect[0] / 0.1;
+		point[1] += data->perso.front_vect[1] / 0.1;
+	}
 	while (!col_rayon(data, point, 1))
 	{
 		point[0] += data->perso.front_vect[0];
@@ -140,14 +145,14 @@ void get_precise_dist(t_cube *data, float point[2])
 		point[0] += data->perso.front_vect[0] / 100;
 		point[1] += data->perso.front_vect[1] / 100;
 	}
-	while (!col_rayon(data, point, 500))
-	{
-		point[0] += data->perso.front_vect[0] / 500;
-		point[1] += data->perso.front_vect[1] / 500;
-	}
+	// while (!col_rayon(data, point, 500))
+	// {
+	// 	point[0] += data->perso.front_vect[0] / 500;
+	// 	point[1] += data->perso.front_vect[1] / 500;
+	// }
 }
 
-int col_rayon(t_cube *data, float point[2], int preci)
+int col_rayon(t_cube *data, float point[2], float preci)
 {
 	if (!good_char(data->map.map[(int) (point[1] + (data->perso.front_vect[1] / preci)) / 15][(int) point[0] / 15]))
 		return (1);
