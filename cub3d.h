@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/10 20:24:32 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/10 22:43:28 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ typedef struct	s_cube {
 }				t_cube;
 
 //main.c
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 //hook.c
 void	init_hook(t_cube *data);
@@ -99,6 +98,7 @@ int		ft_same_str(char *s1, char *s2);
 int		colision(t_cube *data);
 
 //utils_mlx.c
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2]);
 
 //PARSING
@@ -106,7 +106,7 @@ void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2]);
 void parse_file(char *name_file, t_cube *data);
 
 //utils_parse.c
-int	get_identifier(char *line);
+int	get_identifier(char *line, t_cube *data);
 
 //set_ressource.c
 void set_ressource(int fd, t_cube *data);

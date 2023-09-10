@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:55:56 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 15:35:13 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:43:05 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	store_map(char *name_file, t_map *map)
 		line = get_next_line(fd);
 		num_line++;
 	}
+	close(fd);
 	map->map[num_line] = NULL;
 	//verif si num_line correspond à map->height
 }

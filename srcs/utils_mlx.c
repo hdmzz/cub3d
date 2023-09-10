@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 17:08:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 17:23:33 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/01 20:10:59 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 int	my_mlx_pixel_get(t_img *img, int x, int y)
 {
