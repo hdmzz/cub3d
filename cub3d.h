@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 18:52:35 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/10 20:24:32 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_perso {
 	int		pos[2];
 	float		pix_pos[2];
 	float	vect_dir[2];
+	float	front_vect[2];
 	int 	orientation;
 }				t_perso;
 
@@ -79,6 +80,7 @@ typedef struct	s_cube {
 	t_img	south_img;
 	t_img	east_img;
 	t_img	west_img;
+	int		wall_face;
 	int		ceil_color[3];
 	int		floor_color[3];
 	int		mouse_press;
@@ -126,5 +128,11 @@ void	put_all_map(t_cube *data, t_img *img);
 
 //display_windows.c
 void	display_windows(t_cube *data);
+
+//put_rayon.c
+void	put_rayon(t_cube *data, t_img *img);
+
+//put_recating.c
+void	put_recasting(t_cube *data, t_img *img);
 
 #endif

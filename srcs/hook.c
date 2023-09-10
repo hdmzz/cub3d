@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 15:32:41 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/10 18:50:27 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,13 @@ static int	loop(t_cube *data)
 	}
 	if (data->key_press[4])
 	{
-		data->perso.orientation -= 1;
+		data->perso.orientation -= 2;
 		if (data->perso.orientation <= 360)
 			data->perso.orientation += 360;
 	}
 	if (data->key_press[5])
 	{
-		data->perso.orientation += 1;
+		data->perso.orientation += 2;
 		if (data->perso.orientation >= 360)
 			data->perso.orientation -= 360;
 	}
