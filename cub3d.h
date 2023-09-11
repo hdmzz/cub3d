@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/10 22:43:28 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/11 22:33:04 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct	s_cube {
 	t_img	east_img;
 	t_img	west_img;
 	int		wall_face;
+	float	coli_point[2];
 	int		ceil_color[3];
 	int		floor_color[3];
 	int		mouse_press;
@@ -98,8 +99,10 @@ int		ft_same_str(char *s1, char *s2);
 int		colision(t_cube *data);
 
 //utils_mlx.c
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
+int	my_mlx_pixel_get(t_img *img, int x, int y);
 void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2]);
+void	*f_to_img(t_img *data, void *mlx_ptr, char *filename, int size);
 
 //PARSING
 //parse_file.c
@@ -134,5 +137,8 @@ void	put_rayon(t_cube *data, t_img *img);
 
 //put_recating.c
 void	put_recasting(t_cube *data, t_img *img);
+
+//put_line.c
+void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img);
 
 #endif

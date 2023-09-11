@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_recasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 16:43:41 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/10 23:13:54 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/11 22:33:51 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 double get_dist(int num_rayon, float rotation, t_cube *data, t_img *img);
 void get_precise_dist(t_cube *data, float point[2]);
 double get_angle(int num_rayon, float rotation, t_cube *data);
-void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img);
 int good_char(char c);
 int col_rayon(t_cube *data, float point[2], float preci);
 
@@ -75,24 +74,24 @@ void	set_wall_face(t_cube *data, float point[2])
 double get_dist(int num_rayon, float rotation, t_cube *data, t_img *img)
 {
 	int		basic_vect[2];
-	float	point[2];
+	// float	point[2];
 	double	rad;
 	long double	hyp;
 	
 	(void) img;
-	point[0] = data->perso.pix_pos[0];
-	point[1] = data->perso.pix_pos[1];
+	data->coli_point[0] = data->perso.pix_pos[0];
+	data->coli_point[1] = data->perso.pix_pos[1];
 	basic_vect[0] = 0;
 	basic_vect[1] = 1;
 	rad = rotation * (M_PI / 180);
 	data->perso.front_vect[0] = basic_vect[0] * cosf(rad) + basic_vect[1] * sinf(rad);
 	data->perso.front_vect[1] = basic_vect[0] * sinf(rad) - basic_vect[1] * cosf(rad);
 	// printf("x : %f y : %f\n", data->perso.front_vect[0], data->perso.front_vect[1]);
-	get_precise_dist(data, point);
-	set_wall_face(data, point);
-	// put_sphere2(img, point);
-	// printf("%Lf %Lf %f\n", point[0], point[1], pow((data->perso.pix_pos[0] - point[0]), 2) + pow((data->perso.pix_pos[1] - point[1]), 2));
-	hyp = sqrtl(pow((data->perso.pix_pos[0] - point[0]), 2) + pow((data->perso.pix_pos[1] - point[1]), 2));
+	get_precise_dist(data, data->coli_point);
+	set_wall_face(data, data->coli_point);
+	// put_sphere2(img, data->coli_point);
+	// printf("%Lf %Lf %f\n", data->coli_point[0], data->coli_point[1], pow((data->perso.pix_pos[0] - data->coli_point[0]), 2) + pow((data->perso.pix_pos[1] - data->coli_point[1]), 2));
+	hyp = sqrtl(pow((data->perso.pix_pos[0] - data->coli_point[0]), 2) + pow((data->perso.pix_pos[1] - data->coli_point[1]), 2));
 	rad = get_angle(num_rayon, rotation, data) * (M_PI / 180);
 	// printf("hyp : %Lf\n", hyp);
 	return ((double) hyp * cosf(rad));
@@ -183,33 +182,3 @@ double get_angle(int num_rayon, float rotation, t_cube *data)
 	return (0);
 }
 
-void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img)
-{
-	int i;
-
-	i = 0;
-	(void) num_rayon;
-	(void) data;
-	(void) img;
-	// printf("dist : %f\n", dist);
-	double height = (double) (1 / dist) * 2000;
-	while (i < 1080)
-	{
-		if (i > (1080 / 2) - height && i < (1080 / 2) + height)
-		{
-			if (data->wall_face == NO)
-				my_mlx_pixel_put(img, num_rayon, i, 0x000000FF);
-			else if (data->wall_face == SO)
-				my_mlx_pixel_put(img, num_rayon, i, 0x00FF0000);
-			else if (data->wall_face == WE)
-				my_mlx_pixel_put(img, num_rayon, i, 0x0000FF00);
-			else if (data->wall_face == EA)
-				my_mlx_pixel_put(img, num_rayon, i, 0x00FF00FF);
-			else
-				my_mlx_pixel_put(img, num_rayon, i, 0x00AAAAAA);
-		}
-		if (i >= (1080 / 2) + height)
-			my_mlx_pixel_put(img, num_rayon, i, 0x00FFFFFF);
-		i++;
-	}
-}

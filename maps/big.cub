@@ -1,17 +1,17 @@
-SO textures/dirt.xpm
+NO img/north.xpm
 
 
 
-NO textures/wood.xpm
-WE textures/cobble.xpm
+SO img/south.xpm
+
+
+WE img/west.xpm
 
 
 
-EA textures/gold.xpm
+EA img/east.xpm
+
 C 51,51,51
-
-
-
 
 F 112,112,100
 

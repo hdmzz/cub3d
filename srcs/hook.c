@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/10 18:50:27 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:49:40 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	change_vect_dir(t_cube *data, int *key_press)
 		add_vect_dir(data, data->perso.orientation);
 	if (key_press[3])
 		add_vect_dir(data, data->perso.orientation + 270);
+	data->perso.vect_dir[0] *= 2;
+	data->perso.vect_dir[1] *= 2;
 }
 
 int	is_keypress(int key_press[6])

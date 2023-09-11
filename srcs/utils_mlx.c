@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 17:08:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/10 23:07:49 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:22:54 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, unsigned int color)
 {
 	char	*dst;
 
@@ -50,4 +50,10 @@ void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2])
 		}
 		i++;
 	}
+}
+
+void	*f_to_img(t_img *data, void *mlx_ptr, char *filename, int size)
+{
+	data->img = mlx_xpm_file_to_image(mlx_ptr, filename, &size, &size);
+	return (data->img);
 }

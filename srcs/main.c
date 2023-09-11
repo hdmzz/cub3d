@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/01 21:03:12 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:58:39 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (printf("Not good arguments\n"), 1);
+	ft_printf("%d\n", 0xFF00);
 	initiate_data(&data);
-	parse_file(av[1], &data);
 	data.mlx = mlx_init();
+	parse_file(av[1], &data);
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");
 	display_windows(&data);
 	mlx_hook(data.win, ON_MOUSEMOVE, 1L << 6, test_move, &data);
@@ -88,10 +89,10 @@ int	main(int ac, char **av)
 
 void	initiate_data(t_cube *data)
 {
-	data->north_img.img = NULL;
-	data->south_img.img = NULL;
-	data->east_img.img = NULL;
-	data->west_img.img = NULL;
+	// data->north_img.img = NULL;
+	// data->south_img.img = NULL;
+	// data->east_img.img = NULL;
+	// data->west_img.img = NULL;
 	data->ceil_color[0] = -1;
 	data->floor_color[0] = -1;
 	data->mouse_press = 0;

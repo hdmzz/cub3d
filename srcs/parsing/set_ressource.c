@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:52:44 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/01 21:01:10 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:46:54 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,44 @@ static void	verif_and_stock_ressource(char *line, t_cube *data)
 		do_color_ressource(line, data->ceil_color);
 }
 
+// static void	do_img_ressource(int ident, char *line, t_cube *data)
+// {
+// 	char	*file;
+// 	int		s;
+
+// 	s = 30;
+// 	file = get_name_img_file(line);
+// 	ft_printf("file : %s|\n", file);
+// 	if (!file) // || !correct_file(file)
+// 		return (ft_printf("Error not good file\n"), exit(1));
+// 	if (ident == NO)
+// 		data->north_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+// 	if (ident == SO)
+// 		data->north_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+// 	if (ident == WE)
+// 		data->north_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+// 	if (ident == EA)
+// 		data->east_img.img = mlx_xpm_file_to_image(data->mlx, "img", &s, &s);
+// 	puts("b");
+// }
+
 static void	do_img_ressource(int ident, char *line, t_cube *data)
 {
 	char	*file;
-	int		s;
 
-	s = 100;
 	file = get_name_img_file(line);
-	ft_printf("file : %s\n", file);
+	// ft_printf("file : %s|\n", file);
 	if (!file) // || !correct_file(file)
 		return (ft_printf("Error not good file\n"), exit(1));
 	if (ident == NO)
-		data->north_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+		f_to_img(&data->north_img, data->mlx, file, 100);
 	if (ident == SO)
-		data->south_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+		f_to_img(&data->south_img, data->mlx, file, 100);
 	if (ident == WE)
-		data->west_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+		f_to_img(&data->west_img, data->mlx, file, 100);
 	if (ident == EA)
-		data->east_img.img = mlx_xpm_file_to_image(data->mlx, file, &s, &s);
+		f_to_img(&data->east_img, data->mlx, file, 100);
+	puts("b");
 }
 
 static char	*get_name_img_file(char *line)
