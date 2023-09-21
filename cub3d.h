@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/11 22:33:04 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:31:31 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,16 @@ typedef struct s_img
 	int		endian;
 }				t_img;
 
-typedef struct	s_cube {
+typedef struct s_param
+{
+	float	moov_speed;
+	float	fov;
+	float	mouse_speed;
+}				t_param;
+
+
+typedef struct	s_cube 
+{
 	void	*mlx;
 	void	*win;
 	t_map	map;
@@ -80,7 +89,10 @@ typedef struct	s_cube {
 	t_img	south_img;
 	t_img	east_img;
 	t_img	west_img;
+	t_param	settings;
 	int		wall_face;
+	int		mode_full_map;
+	int		mode_settings;
 	float	coli_point[2];
 	int		ceil_color[3];
 	int		floor_color[3];
@@ -100,9 +112,10 @@ int		colision(t_cube *data);
 
 //utils_mlx.c
 void	my_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
-int	my_mlx_pixel_get(t_img *img, int x, int y);
+int		my_mlx_pixel_get(t_img *img, int x, int y);
 void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2]);
 void	*f_to_img(t_img *data, void *mlx_ptr, char *filename, int size);
+int	ft_opacity(int color, double opacity);
 
 //PARSING
 //parse_file.c
@@ -128,6 +141,9 @@ void	put_minimap(t_cube *data, t_img *img);
 
 //put_all_map.c
 void	put_all_map(t_cube *data, t_img *img);
+
+//put_settings.c
+void	put_settings(t_cube *data, t_img *img);
 
 //display_windows.c
 void	display_windows(t_cube *data);

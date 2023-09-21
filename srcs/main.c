@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/11 21:58:39 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:10:58 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,6 @@ void	initiate_data(t_cube *data)
 	data->mouse_press = 0;
 	data->center_north[0] = 0;
 	data->center_north[1] = 0;
+	data->mode_full_map = 0;
+	data->mode_settings = 0;
 }

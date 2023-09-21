@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 21:38:18 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 12:39:22 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:09:15 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,17 @@ void	put_all_map2(t_img *img, t_cube *data)
 	int y;
 
 	x = 0;
-	while (x < data->map.width * 20 && x < 1900)
+	while (x < 1920)
 	{
 		y = 0;
-		while (y < data->map.height * 20 && y < 1000)
+		while (y < 1080)
 		{
-			// ft_printf("coords %d %d\n", x/20, y/20);
-			if (data->map.map[y / 20][x / 20] == '1')
+			if (x < data->map.width * 15 && y < data->map.height * 15 && data->map.map[y / 15][x / 15] == '1')
 				my_mlx_pixel_put(img, x, y, 0x00666666);
-			else if (data->map.map[y / 20][x / 20] == ' ')
-				my_mlx_pixel_put(img, x, y, 0x00222222);
-			else
+			else if (x < data->map.width * 15 && y < data->map.height * 15 && data->map.map[y / 15][x / 15] != ' ')
 				my_mlx_pixel_put(img, x, y, 0x00DDDDDD);
+			else 
+				my_mlx_pixel_put(img, x, y, ft_opacity(my_mlx_pixel_get(img, x, y), 0.5));
 			y++;
 		}
 		x++;
@@ -53,13 +52,13 @@ void	put_perso2(t_img *img, t_cube *data)
 	int		y;
 	float	dist;
 
-	x = data->perso.pos[0] * 20 + 10 - 10;
-	while (x < data->perso.pos[0] * 20 + 10 + 10)
+	x = data->perso.pix_pos[0] - 10;
+	while (x < data->perso.pix_pos[0] + 10)
 	{
-		y = data->perso.pos[1] * 20 + 10 - 10;
-		while (y < data->perso.pos[1] * 20 + 10 + 10)
+		y = data->perso.pix_pos[1] - 10;
+		while (y < data->perso.pix_pos[1] + 10)
 		{
-			dist = sqrt(pow((x - (data->perso.pos[0] * 20 + 10)), 2) + pow((y - (data->perso.pos[1] * 20 + 10)), 2));
+			dist = sqrt(pow((x - (data->perso.pix_pos[0])), 2) + pow((y - (data->perso.pix_pos[1])), 2));
 			if (dist < 5)
 				my_mlx_pixel_put(img, x, y, 0x00FF0000);
 			y++;

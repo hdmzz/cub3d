@@ -1,15 +1,15 @@
-NO img/north.xpm
+NO img/north_txtr.xpm
 
 
 
-SO img/south.xpm
+SO img/south_txtr.xpm
 
 
-WE img/west.xpm
+WE img/west_txtr.xpm
 
 
 
-EA img/east.xpm
+EA img/east_txtr.xpm
 
 C 51,51,51
 

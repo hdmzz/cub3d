@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 17:08:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/11 17:22:54 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:09:21 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, unsigned int color)
 {
 	char	*dst;
 
+	if (x < 0 || y < 0 || x >= 1920 || y >= 1080)
+		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -52,8 +54,27 @@ void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2])
 	}
 }
 
-void	*f_to_img(t_img *data, void *mlx_ptr, char *filename, int size)
+void	*f_to_img(t_img *img, void *mlx_ptr, char *filename, int size)
 {
-	data->img = mlx_xpm_file_to_image(mlx_ptr, filename, &size, &size);
-	return (data->img);
+	img->img = mlx_xpm_file_to_image(mlx_ptr, filename, &size, &size);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	return (img->img);
+}
+
+int	ft_opacity(int color, double opacity)
+{
+	double	red;
+	double	green;
+	double	blue;
+	int		total;
+
+	if (opacity < 0)
+		opacity = 0;
+	if (opacity > 1)
+		opacity = 1;
+	red = (double)((color & 0xFF0000) >> 16)*opacity;
+	green = (double)((color & 0x00FF00) >> 8)*opacity;
+	blue = (double)(color & 0x0000FF)*opacity;
+	total = blue + ((int)green << 8) + ((int)red << 16);
+	return (total);
 }

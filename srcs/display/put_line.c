@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:15:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/11 23:15:37 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:33:50 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ int		get_color(int color[3])
 	return (to_return);
 }
 
-float ft_modf(float nbr, int div)
+float ft_fmod(float nbr, int div)
 {
-    while (nbr > (float) div)
-        nbr -= div;
+    int i;
+
+    i = nbr / div;
+    // while (nbr > (float) div)
+        nbr -= div * i;
     return (nbr);
 }
 
@@ -37,11 +40,12 @@ void    put_north_texture(t_img *img, int x, int y, t_cube *data, double height)
     int color;
 
     (void) height;
-    pos_pix_texture[0] = ft_modf(data->coli_point[0], 15) * 100 / 15;
-    pos_pix_texture[1] = ((y - ((1080 / 2) - height)) * 50) / height;
-    if (pos_pix_texture[1] >= 100)
-        pos_pix_texture[1] = 50;
+    (void) data;
+    (void) pos_pix_texture;
+    pos_pix_texture[0] = ft_fmod(data->coli_point[0], 15) * 200 / 15;
+    pos_pix_texture[1] = ((y - ((1080 / 2) - height / 2)) * 200) / height;
     color = my_mlx_pixel_get(&data->north_img, pos_pix_texture[0], pos_pix_texture[1]);
+    // color = 0x00AAAAAA;
     my_mlx_pixel_put(img, x, y, color);
 }
 
@@ -51,26 +55,13 @@ void    put_south_texture(t_img *img, int x, int y, t_cube *data, double height)
     int color;
 
     (void) height;
-    pos_pix_texture[0] = ft_modf(data->coli_point[0], 15) * 100 / 15;
-    pos_pix_texture[0] = 100 - pos_pix_texture[0];
-    pos_pix_texture[1] = ((y - ((1080 / 2) - height)) * 50) / height;
-    // if (pos_pix_texture[1] >= 100)
-    //     pos_pix_texture[1] = 50;
+    (void) data;
+    (void) pos_pix_texture;
+    pos_pix_texture[0] = ft_fmod(data->coli_point[0], 15) * 200 / 15;
+    pos_pix_texture[0] = 199 - pos_pix_texture[0]; //pour inverser le sens d'affichage;
+    pos_pix_texture[1] = ((y - ((1080 / 2) - height / 2)) * 200) / height;
     color = my_mlx_pixel_get(&data->south_img, pos_pix_texture[0], pos_pix_texture[1]);
-    my_mlx_pixel_put(img, x, y, color);
-}
-
-void    put_west_texture(t_img *img, int x, int y, t_cube *data, double height)
-{
-    int pos_pix_texture[2];
-    int color;
-
-    (void) height;
-    pos_pix_texture[0] = ft_modf(data->coli_point[1], 15) * 100 / 15;
-    pos_pix_texture[1] = ((y - ((1080 / 2) - height)) * 50) / height;
-    if (pos_pix_texture[1] >= 100)
-        pos_pix_texture[1] = 50;
-    color = my_mlx_pixel_get(&data->west_img, pos_pix_texture[0], pos_pix_texture[1]);
+    // color = 0x00AAAAAA;
     my_mlx_pixel_put(img, x, y, color);
 }
 
@@ -80,14 +71,31 @@ void    put_east_texture(t_img *img, int x, int y, t_cube *data, double height)
     int color;
 
     (void) height;
-    pos_pix_texture[0] = ft_modf(data->coli_point[1], 15) * 100 / 15;
-    pos_pix_texture[1] = ((y - ((1080 / 2) - height)) * 50) / height;
-    if (pos_pix_texture[1] >= 100)
-        pos_pix_texture[1] = 50;
+    (void) data;
+    (void) pos_pix_texture;
+    pos_pix_texture[0] = ft_fmod(data->coli_point[1], 15) * 200 / 15;
+    pos_pix_texture[1] = ((y - ((1080 / 2) - height / 2)) * 200) / height;
+    // printf("height : %f calcul : %f pos y : %d \n", height, (1080 / 2) - height, pos_pix_texture[1]);
     color = my_mlx_pixel_get(&data->east_img, pos_pix_texture[0], pos_pix_texture[1]);
+    // color = 0x00AAAAAA;
     my_mlx_pixel_put(img, x, y, color);
 }
 
+void    put_west_texture(t_img *img, int x, int y, t_cube *data, double height)
+{
+    int pos_pix_texture[2];
+    int color;
+
+    (void) height;
+    (void) data;
+    (void) pos_pix_texture;
+    pos_pix_texture[0] = ft_fmod(data->coli_point[1], 15) * 200 / 15;
+    pos_pix_texture[0] = 199 - pos_pix_texture[0]; //pour inverser le sens d'affichage;
+    pos_pix_texture[1] = ((y - ((1080 / 2) - height / 2)) * 200) / height;
+    color = my_mlx_pixel_get(&data->west_img, pos_pix_texture[0], pos_pix_texture[1]);
+    // color = 0x00AAAAAA;
+    my_mlx_pixel_put(img, x, y, color);
+}
 
 void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img)
 {
@@ -95,18 +103,14 @@ void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img)
 
 	i = 0;
 	// printf("dist : %f\n", dist);
-	double height = (double) (1 / dist) * 10000;
-    data->north_img.addr = mlx_get_data_addr(data->north_img.img, &data->north_img.bits_per_pixel, \
-		&data->north_img.line_length, &data->north_img.endian);
-    data->south_img.addr = mlx_get_data_addr(data->south_img.img, &data->south_img.bits_per_pixel, \
-		&data->south_img.line_length, &data->south_img.endian);
-    data->west_img.addr = mlx_get_data_addr(data->west_img.img, &data->west_img.bits_per_pixel, \
-		&data->west_img.line_length, &data->west_img.endian);
-    data->east_img.addr = mlx_get_data_addr(data->east_img.img, &data->east_img.bits_per_pixel, \
-		&data->east_img.line_length, &data->east_img.endian);
+	double height = (double) (1 / dist) * 10000 * 2;
+    // data->north_img.addr = mlx_get_data_addr(data->north_img.img, &data->north_img.bits_per_pixel, &data->north_img.line_length, &data->north_img.endian);
+    // data->south_img.addr = mlx_get_data_addr(data->south_img.img, &data->south_img.bits_per_pixel, &data->south_img.line_length, &data->south_img.endian);
+    // data->west_img.addr = mlx_get_data_addr(data->west_img.img, &data->west_img.bits_per_pixel, &data->west_img.line_length, &data->west_img.endian);
+    // data->east_img.addr = mlx_get_data_addr(data->east_img.img, &data->east_img.bits_per_pixel, &data->east_img.line_length, &data->east_img.endian);
 	while (i < 1080)
 	{
-		if (i > (1080 / 2) - height && i < (1080 / 2) + height)
+		if (i > (1080 / 2) - height / 2 && i < (1080 / 2) + height / 2)
 		{
 			if (data->wall_face == NO)
 				put_north_texture(img, num_rayon, i, data, height);
@@ -117,11 +121,11 @@ void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img)
 			else if (data->wall_face == EA)
 				put_east_texture(img, num_rayon, i, data, height);
 			else
-				my_mlx_pixel_put(img, num_rayon, i, 0x00AAAAAA);
+				my_mlx_pixel_put(img, num_rayon, i, 0x00FF0000);
 		}
-		if (i >= (1080 / 2) + height)
+		if (i >= (1080 / 2) + height / 2)
 			my_mlx_pixel_put(img, num_rayon, i, get_color(data->floor_color));
-		if (i <= (1080 / 2) - height)
+		if (i <= (1080 / 2) - height / 2)
 			my_mlx_pixel_put(img, num_rayon, i, get_color(data->ceil_color));
 		i++;
 	}

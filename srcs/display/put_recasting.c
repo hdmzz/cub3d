@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_recasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 16:43:41 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/11 22:33:51 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:56:11 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ void	put_recasting(t_cube *data, t_img *img)
 }
 void	set_wall_face(t_cube *data, float point[2])
 {
-	if (!good_char(data->map.map[(int) (point[1] + 0.1) / 15][(int) point[0] / 15]))
+	if (!good_char(data->map.map[(int) (point[1] + 0.01) / 15][(int) point[0] / 15]))
 		data->wall_face = SO;
-	else if (!good_char(data->map.map[(int) (point[1] - 0.1) / 15][(int) point[0] / 15]))
+	else if (!good_char(data->map.map[(int) (point[1] - 0.01) / 15][(int) point[0] / 15]))
 		data->wall_face = NO;
-	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] + 0.1) / 15]))
+	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] + 0.01) / 15]))
 		data->wall_face = EA;
-	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] - 0.1) / 15]))
+	else if (!good_char(data->map.map[(int) point[1] / 15][(int) (point[0] - 0.01) / 15]))
 		data->wall_face = WE;
-	else
-		data->wall_face = -1;
+	// else
+	// 	data->wall_face = -1;
 }
 
 double get_dist(int num_rayon, float rotation, t_cube *data, t_img *img)
@@ -144,12 +144,86 @@ void get_precise_dist(t_cube *data, float point[2])
 		point[0] += data->perso.front_vect[0] / 100;
 		point[1] += data->perso.front_vect[1] / 100;
 	}
+	// point[0] += data->perso.front_vect[0] / 100;
+	// point[1] += data->perso.front_vect[1] / 100;
 	// while (!col_rayon(data, point, 500))
 	// {
 	// 	point[0] += data->perso.front_vect[0] / 500;
 	// 	point[1] += data->perso.front_vect[1] / 500;
 	// }
 }
+
+// void get_precise_dist(t_cube *data, float point[2])
+// {
+// 	float coli_point[2];
+	
+// 	while (!col_rayon(data, point, 1))
+// 	{
+// 		point[0] += data->perso.front_vect[0];
+// 		point[1] += data->perso.front_vect[1];
+// 	}
+// 	while (!col_rayon(data, point, 10))
+// 	{
+// 		point[0] += data->perso.front_vect[0] / 10;
+// 		point[1] += data->perso.front_vect[1] / 10;
+// 	}
+// 	if (point[0] / 15 != (point[0] + data->perso.front_vect[0]) / 15)
+// 	{
+// 		if ((point[0] + data->perso.front_vect[0]) / 15 < point[0] / 15)
+// 		{
+// 			coli_point[0] = ((int) point[0] / 15) * 15;
+// 			coli_point[1] = point[1] + (coli_point[0] - point[0]) / (data->perso.front_vect[0] - point[0]) * (data->perso.front_vect[1] - point[1]);
+// 			if (good_char(data->map.map[(int) coli_point[1] / 15][(int) coli_point[0] / 15]) && !good_char(data->map.map[(int) coli_point[1] / 15][(int) (coli_point[0] - 0.01) / 15]))
+// 			{
+// 				point[0] = coli_point[0];
+// 				point[1] = coli_point[1];
+// 				data->wall_face = WE;
+// 				return ;
+// 			}
+// 		}
+// 		if ((point[0] + data->perso.front_vect[0]) / 15 > point[0] / 15)
+// 		{
+// 			coli_point[0] = ((int) (point[0] + data->perso.front_vect[0]) / 15) * 15;
+// 			coli_point[1] = point[1] + (coli_point[0] - point[0]) / (data->perso.front_vect[0] - point[0]) * (data->perso.front_vect[1] - point[1]);
+// 			if (!good_char(data->map.map[(int) coli_point[1] / 15][(int) coli_point[0] / 15]) && good_char(data->map.map[(int) coli_point[1] / 15][(int) (coli_point[0] - 0.01) / 15]))
+// 			{
+// 				point[0] = coli_point[0];
+// 				point[1] = coli_point[1];
+// 				data->wall_face = EA;
+// 				return ;
+// 			}
+// 		}
+// 	}
+// 	if (point[1] / 15 != (point[1] + data->perso.front_vect[1]) / 15)
+// 	{
+// 		if ((point[1] + data->perso.front_vect[1]) / 15 < point[1] / 15)
+// 		{
+// 			coli_point[1] = ((int) point[1] / 15) * 15;
+// 			coli_point[0] = point[0] + (coli_point[1] - point[1]) / (data->perso.front_vect[1] - point[1]) * (data->perso.front_vect[0] - point[0]);
+// 			printf("%f %f\n", coli_point[0], coli_point[1]);
+// 			if (good_char(data->map.map[(int) coli_point[1] / 15][(int) coli_point[0] / 15]) && !good_char(data->map.map[(int) (coli_point[1] - 0.01) / 15][(int) coli_point[0] / 15]))
+// 			{
+// 				point[0] = coli_point[0];
+// 				point[1] = coli_point[1];
+// 				data->wall_face = NO;
+// 				return ;
+// 			}
+// 		}
+// 		if ((point[1] + data->perso.front_vect[1]) / 15 > point[1] / 15)
+// 		{
+// 			coli_point[1] = ((int) (point[1] + data->perso.front_vect[1]) / 15) * 15;
+// 			coli_point[0] = point[0] + (coli_point[1] - point[1]) / (data->perso.front_vect[1] - point[1]) * (data->perso.front_vect[0] - point[0]);
+// 			if (!good_char(data->map.map[(int) coli_point[1] / 15][(int) coli_point[0] / 15]) && good_char(data->map.map[(int) (coli_point[1] - 0.01) / 15][(int) coli_point[0] / 15]))
+// 			{
+// 				point[0] = coli_point[0];
+// 				point[1] = coli_point[1];
+// 				data->wall_face = SO;
+// 				return ;
+// 			}
+// 		}
+// 	}
+// 	data->wall_face = -1;
+// }
 
 int col_rayon(t_cube *data, float point[2], float preci)
 {
