@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/21 16:31:31 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:26:52 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ enum {
 	ON_MOUSEMOVE = 6,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
+};
+
+enum {
+	SPEED,
+	FOV,
+	M_SPEED	
 };
 
 enum {
@@ -73,7 +79,7 @@ typedef struct s_img
 
 typedef struct s_param
 {
-	float	moov_speed;
+	float	move_speed;
 	float	fov;
 	float	mouse_speed;
 }				t_param;
@@ -97,6 +103,8 @@ typedef struct	s_cube
 	int		ceil_color[3];
 	int		floor_color[3];
 	int		mouse_press;
+	int		type_param_click;
+	int		value_param[3];
 	int		key_press[6];
 	float	center_north[2];
 }				t_cube;
@@ -144,6 +152,7 @@ void	put_all_map(t_cube *data, t_img *img);
 
 //put_settings.c
 void	put_settings(t_cube *data, t_img *img);
+void	put_settings_opti(t_cube *data);
 
 //display_windows.c
 void	display_windows(t_cube *data);

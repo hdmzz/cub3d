@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:17:09 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/21 16:49:08 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:27:01 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	display_windows(t_cube *data)
 	mlx_set_font(data->mlx, data->win, "*-*-*-*-*-*-*-*-*-*-*-*-100-*-16");
 	if (data->mode_settings)
 	{
-		mlx_string_put(data->mlx, data->win, 720, 320 + 16, 0x000000, "speed :");
-		mlx_string_put(data->mlx, data->win, 720, 420 + 16, 0x000000, "fov :");
-		mlx_string_put(data->mlx, data->win, 720, 520 + 16, 0x000000, "mouse sensibility :");
+		mlx_string_put(data->mlx, data->win, 720, 320 + 16, 0x000000, "Speed :");
+		mlx_string_put(data->mlx, data->win, 720, 470 + 16, 0x000000, "FOV :");
+		mlx_string_put(data->mlx, data->win, 720, 620 + 16, 0x000000, "Mouse sensibility :");
 	}
 	mlx_string_put(data->mlx, data->win, data->center_north[0] - 4, data->center_north[1] + 7, 0x000000, "N");
 	// mlx_put_image_to_window(data->mlx, data->win, test.img, 110 - 15, 170 - 15);

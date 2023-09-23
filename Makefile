@@ -6,7 +6,7 @@
 #    By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/29 17:26:09 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/09/21 16:06:13 by ajakubcz         ###   ########.fr        #
+#    Updated: 2023/09/23 18:25:52 by ajakubcz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS =	$(DIR_SRCS)main.c \
 		$(DIR_DISPLAY)put_minimap.c \
 		$(DIR_DISPLAY)put_all_map.c \
 		$(DIR_DISPLAY)put_settings.c \
+		$(DIR_DISPLAY)put_settings_opti.c \
 		$(DIR_DISPLAY)display_windows.c \
 		$(DIR_DISPLAY)put_rayon.c \
 		$(DIR_DISPLAY)put_recasting.c \

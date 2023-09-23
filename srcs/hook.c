@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/21 16:16:38 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:32:10 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	press(int keycode, t_cube *data)
 		//faut free mon reuf;
 		exit(1);
 	}
-	ft_printf("press %d\n", keycode);
+	// ft_printf("press %d\n", keycode);
 	if (keycode == 119)
 		data->key_press[0] = 1;
 	if (keycode == 97)

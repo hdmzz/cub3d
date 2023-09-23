@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/21 16:10:58 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:46:25 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,62 @@ int	test_move(int x, int y, t_cube *data)
 	return (0);
 }
 
-int	test_click(int i, int x, int y, t_cube *data)
+int move_settings(int x, int y, t_cube *data)
 {
-	(void) i;
+	(void) y;
+	if (data->mouse_press && data->type_param_click != -1)
+	{
+		if (x < 760)
+		{
+			if (data->value_param[data->type_param_click] != 760)
+			{
+				data->value_param[data->type_param_click] = 760;
+				put_settings_opti(data);
+			}
+		}
+		else if (x > 1250)
+		{
+			if (data->value_param[data->type_param_click] != 1250)
+			{
+				data->value_param[data->type_param_click] = 1250;
+				put_settings_opti(data);
+			}
+		}
+		else
+		{
+			data->value_param[data->type_param_click] = x;
+			put_settings_opti(data);
+		}
+	}
+	return (0); 	
+}
+
+int	test_click(int button, int x, int y, t_cube *data)
+{
 	(void) x;
 	(void) y;
+	(void) button;
 	data->mouse_press = 1;
+	if (data->mouse_press && x > 750 && x < 1260)
+	{
+		if (y > 400 - 30 && y < 400 + 30)
+			data->type_param_click = SPEED;
+		if (y > 550 - 30 && y < 550 + 30)
+			data->type_param_click = FOV;
+		if (y > 700 - 30 && y < 700 + 30)
+			data->type_param_click = M_SPEED;
+		move_settings(x, y, data);
+	}
 	write(2, "click\n", 6);
 	return (0);
 }
 
-int	test_release(int i, int x, int y, t_cube *data)
+int	test_release(int button, int x, int y, t_cube *data)
 {
-	(void) i;
 	(void) x;
 	(void) y;
+	(void) button;
+	data->type_param_click = -1;
 	data->mouse_press = 0;
 	write(2, "relache\n", 8);
 	return (0);
@@ -80,7 +121,7 @@ int	main(int ac, char **av)
 	parse_file(av[1], &data);
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "Cub3D!");
 	display_windows(&data);
-	mlx_hook(data.win, ON_MOUSEMOVE, 1L << 6, test_move, &data);
+	mlx_hook(data.win, ON_MOUSEMOVE, 1L << 6, move_settings, &data);
 	mlx_hook(data.win, 4, 1L << 2, test_click, &data);
 	mlx_hook(data.win, 5, 1L << 3, test_release, &data);
 	init_hook(&data);
@@ -100,4 +141,9 @@ void	initiate_data(t_cube *data)
 	data->center_north[1] = 0;
 	data->mode_full_map = 0;
 	data->mode_settings = 0;
+	data->type_param_click = -1;
+	data->value_param[SPEED] = 1000;
+	data->value_param[FOV] = 1000;
+	data->value_param[M_SPEED] = 1000;
+
 }
