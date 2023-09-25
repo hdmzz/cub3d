@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/23 18:46:25 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:08:05 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,29 @@ int move_settings(int x, int y, t_cube *data)
 	{
 		if (x < 760)
 		{
-			if (data->value_param[data->type_param_click] != 760)
+			if (data->pos_param[data->type_param_click] != 760)
 			{
-				data->value_param[data->type_param_click] = 760;
+				data->pos_param[data->type_param_click] = 760;
 				put_settings_opti(data);
 			}
 		}
 		else if (x > 1250)
 		{
-			if (data->value_param[data->type_param_click] != 1250)
+			if (data->pos_param[data->type_param_click] != 1250)
 			{
-				data->value_param[data->type_param_click] = 1250;
+				data->pos_param[data->type_param_click] = 1250;
 				put_settings_opti(data);
 			}
 		}
 		else
 		{
-			data->value_param[data->type_param_click] = x;
+			data->pos_param[data->type_param_click] = x;
 			put_settings_opti(data);
+		}
+		if (data->type_param_click == FOV)
+		{
+			data->value_param[FOV] = (data->pos_param[FOV] - 760) * (110 - 30) / (1250 - 760) + 30;
+			printf("fov : %d\n", data->value_param[FOV]);
 		}
 	}
 	return (0); 	
@@ -84,7 +89,7 @@ int	test_click(int button, int x, int y, t_cube *data)
 	(void) y;
 	(void) button;
 	data->mouse_press = 1;
-	if (data->mouse_press && x > 750 && x < 1260)
+	if (data->mouse_press && x > 730 && x < 1280)
 	{
 		if (y > 400 - 30 && y < 400 + 30)
 			data->type_param_click = SPEED;
@@ -103,6 +108,13 @@ int	test_release(int button, int x, int y, t_cube *data)
 	(void) x;
 	(void) y;
 	(void) button;
+	
+	
+	// if (data->type_param_click == FOV)
+	// 	data->value_param[FOV] = (data->pos_param[FOV] - 760) * (110 - 30) / (1250 - 760);
+	// printf("");
+	if (data->type_param_click == FOV)
+		display_windows(data);
 	data->type_param_click = -1;
 	data->mouse_press = 0;
 	write(2, "relache\n", 8);
@@ -142,8 +154,8 @@ void	initiate_data(t_cube *data)
 	data->mode_full_map = 0;
 	data->mode_settings = 0;
 	data->type_param_click = -1;
-	data->value_param[SPEED] = 1000;
-	data->value_param[FOV] = 1000;
-	data->value_param[M_SPEED] = 1000;
-
+	data->pos_param[SPEED] = 1000;
+	data->pos_param[FOV] = 1000;
+	data->pos_param[M_SPEED] = 1000;
+	data->value_param[FOV] = 60;
 }

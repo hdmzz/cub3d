@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/23 18:26:52 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:24:47 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct	s_cube
 	int		mouse_press;
 	int		type_param_click;
 	int		value_param[3];
+	int		pos_param[3];
 	int		key_press[6];
 	float	center_north[2];
 }				t_cube;

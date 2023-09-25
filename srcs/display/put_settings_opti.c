@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:09:34 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/23 18:34:54 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:25:47 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	put_line_cursor_opti(t_cube *data, t_img *img, int height, int type)
 
 void	put_cursor_opti(t_cube *data, t_img *img, int height, int type)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
 	float	dist;
 	
 	(void) data;
@@ -103,7 +103,7 @@ void	put_cursor_opti(t_cube *data, t_img *img, int height, int type)
 		y = height - 30;
 		while (y < height + 30)
 		{
-			dist = sqrt(pow((x - (data->value_param[type] - 700)), 2) + pow((y - height), 2));
+			dist = sqrt(pow((x - (data->pos_param[type] - 700)), 2) + pow((y - height), 2));
 			if (dist < 30 && dist > 25)
 				my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
 			else if (dist <= 25)
