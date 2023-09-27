@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:24:07 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/25 15:42:43 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:34:18 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void	add_vect_dir(t_cube *data, int orientation)
 	rad = orientation * (M_PI / 180);
 	vect_to_add[0] = basic_vect[0] * cosf(rad) - basic_vect[1] * sinf(rad);
 	vect_to_add[1] = basic_vect[0] * sinf(rad) + basic_vect[1] * cosf(rad);
-	printf("ta mere : %f\n", rad);
 	data->perso.vect_dir[0] += vect_to_add[0];
 	data->perso.vect_dir[1] += vect_to_add[1];
 }

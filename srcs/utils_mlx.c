@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 17:08:52 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/21 16:09:21 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:12:00 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,17 @@ int	ft_opacity(int color, double opacity)
 
 	if (opacity < 0)
 		opacity = 0;
-	if (opacity > 1)
-		opacity = 1;
+	// if (opacity > 1)
+	// 	opacity = 1;
 	red = (double)((color & 0xFF0000) >> 16)*opacity;
+	if (red > 0xFF)
+		red = 0xFF;
 	green = (double)((color & 0x00FF00) >> 8)*opacity;
+	if (green > 0xFF)
+		green = 0xFF;
 	blue = (double)(color & 0x0000FF)*opacity;
+	if (blue > 0xFF)
+		blue = 0xFF;
 	total = blue + ((int)green << 8) + ((int)red << 16);
 	return (total);
 }

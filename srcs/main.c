@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:27:29 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/25 18:08:05 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:00:57 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,5 @@ void	initiate_data(t_cube *data)
 	data->pos_param[SPEED] = 1000;
 	data->pos_param[FOV] = 1000;
 	data->pos_param[M_SPEED] = 1000;
-	data->value_param[FOV] = 60;
+	data->value_param[FOV] = 70;//(data->pos_param[FOV] - 760) * (110 - 30) / (1250 - 760) + 30;
 }

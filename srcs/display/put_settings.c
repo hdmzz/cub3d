@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 21:38:18 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/25 13:25:37 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:29:08 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	put_cadre(t_img *img)
 				my_mlx_pixel_put(img, x, y, 0x00000000);
 			else if (x > 700 && x < 1310 && ((y > 300 && y < 310) || (y > 750 && y < 760)))
 				my_mlx_pixel_put(img, x, y, 0x00000000);
-			else if (y > 310 && y < 750 && x > 710 && x < 1300)
-				my_mlx_pixel_put(img, x, y, 0x00AAAAAA);
+			else if (y >= 310 && y <= 750 && x >= 710 && x <= 1300)
+				my_mlx_pixel_put(img, x, y, ft_opacity(my_mlx_pixel_get(img, x, y), 0.6));
 			y++;
 		}
 		x++;

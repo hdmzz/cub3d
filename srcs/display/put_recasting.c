@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 16:43:41 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/25 18:20:25 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:07:27 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,17 @@ void	put_recasting(t_cube *data, t_img *img)
 	rotation = data->perso.orientation - (data->value_param[FOV] / 2);
 	if (rotation < 0)
 		rotation += 360;
+	printf("rotation start : %f\n", rotation);
 	while (num_rayon < 1920)
-	{		
+	{
 		put_line(num_rayon, get_dist(num_rayon, rotation, data, img), data, img);
 		rotation += (float) data->value_param[FOV] / 1920;
 		num_rayon++;
 		if (rotation >= 360)
 			rotation -= 360;
 	}
-	printf("rotation : %f\n", rotation);
+	printf("rotation end : %f\n", rotation);
+
 }
 void	set_wall_face(t_cube *data, float point[2])
 {
@@ -95,7 +97,8 @@ double get_dist(int num_rayon, float rotation, t_cube *data, t_img *img)
 	hyp = sqrtl(pow((data->perso.pix_pos[0] - data->coli_point[0]), 2) + pow((data->perso.pix_pos[1] - data->coli_point[1]), 2));
 	rad = get_angle(num_rayon, rotation, data) * (M_PI / 180);
 	// printf("hyp : %Lf\n", hyp);
-	return ((double) hyp * cosf(rad) * ((data->value_param[FOV] - 28) * 0.1));
+	// printf("value : %f\n", (float) ((float) data->value_param[FOV] / 60));
+	return ((double) hyp * cosf(rad) * ((float) ((float) data->value_param[FOV] / (float) 60)));
 }
 
 // void get_precise_dist(t_cube *data, float point[2])

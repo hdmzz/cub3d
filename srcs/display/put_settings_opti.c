@@ -6,13 +6,13 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:09:34 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/25 13:25:47 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:51:12 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_cadre_opti(t_img *img);
+void	put_cadre_opti(t_cube *data, t_img *img);
 void	put_line_cursor_opti(t_cube *data, t_img *img, int height, int type);
 void	put_cursor_opti(t_cube *data, t_img *img, int height, int type);
 
@@ -23,25 +23,26 @@ void	put_settings_opti(t_cube *data)
 	img.img = mlx_new_image(data->mlx, 610, 460);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	put_cadre_opti(&img);
+	put_cadre_opti(data, &img);
 	put_line_cursor_opti(data, &img, 100, SPEED);
 	put_line_cursor_opti(data, &img, 250, FOV);
 	put_line_cursor_opti(data, &img, 400, M_SPEED);
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 700, 300);
 	if (data->mode_settings)
 	{
-		mlx_string_put(data->mlx, data->win, 720, 320 + 16, 0x000000, "Speed :");
-		mlx_string_put(data->mlx, data->win, 720, 470 + 16, 0x000000, "FOV :");
-		mlx_string_put(data->mlx, data->win, 720, 620 + 16, 0x000000, "Mouse sensibility :");
+		mlx_string_put(data->mlx, data->win, 720, 320 + 16, 0xFFFFFF, "Speed :");
+		mlx_string_put(data->mlx, data->win, 720, 470 + 16, 0xFFFFFF, "FOV :");
+		mlx_string_put(data->mlx, data->win, 720, 620 + 16, 0xFFFFFF, "Mouse sensibility :");
 	}
-	mlx_destroy_image(data->mlx, img.img);	
+	mlx_destroy_image(data->mlx, img.img);
 }
 
-void	put_cadre_opti(t_img *img)
+void	put_cadre_opti(t_cube *data, t_img *img)
 {
 	int x;
 	int y;
 
+	(void) data;
 	x = 0;
 	while (x < 610)
 	{
@@ -53,7 +54,7 @@ void	put_cadre_opti(t_img *img)
 			else if (x > 0 && x < 610 && ((y > 0 && y < 10) || (y > 450 && y < 460)))
 				my_mlx_pixel_put(img, x, y, 0x00000000);
 			else if (y > 10 && y < 450 && x > 10 && x < 600)
-				my_mlx_pixel_put(img, x, y, 0x00AAAAAA);
+				my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(&data->all_win, x + 700, y + 300));
 			y++;
 		}
 		x++;

@@ -6,7 +6,7 @@
 /*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/25 13:24:47 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:45:05 by ajakubcz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct	s_cube
 	void	*mlx;
 	void	*win;
 	t_map	map;
+	t_img	all_win;
 	t_perso	perso;
 	t_img	north_img;
 	t_img	south_img;
