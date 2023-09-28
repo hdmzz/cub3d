@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/28 13:42:04 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:30:51 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 # define SO_LONG_H
 
 # define SIZE_TILE 100
+# define ERR_PLAY_NUM "Too many player positions"
 
 # include <math.h>
 # include <fcntl.h> //open
 # include <unistd.h> //close et sleep
 # include <mlx.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include "libft/get_next_line.h"
 # include "libft/ft_printf.h"
 # include "libft/libft.h"
@@ -125,20 +127,20 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
 int		my_mlx_pixel_get(t_img *img, int x, int y);
 void	put_img_to_img(t_cube *data, t_img *img, t_img *to_img, int point[2]);
 void	*f_to_img(t_img *data, void *mlx_ptr, char *filename, int size);
-int	ft_opacity(int color, double opacity);
+int		ft_opacity(int color, double opacity);
 
 //PARSING
 //parse_file.c
-void parse_file(char *name_file, t_cube *data);
+void	parse_file(char *name_file, t_cube *data);
 
 //utils_parse.c
-int	get_identifier(char *line, t_cube *data);
+int		get_identifier(char *line, t_cube *data);
 
 //set_ressource.c
-void set_ressource(int fd, t_cube *data);
+void	set_ressource(int fd, t_cube *data);
 
 //set_map.c
-void set_map(int fd, char *name_file, t_cube *data);
+void	set_map(int fd, char *name_file, t_cube *data);
 void	print_map(char **map); //TO DELETE
 
 //verif_map.c
