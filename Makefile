@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+         #
+#    By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/29 17:26:09 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/09/23 18:25:52 by ajakubcz         ###   ########.fr        #
+#    Updated: 2023/09/28 13:43:32 by hdamitzi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS =	$(DIR_SRCS)main.c \
 		$(DIR_PARSING)set_ressource.c \
 		$(DIR_PARSING)set_map.c \
 		$(DIR_PARSING)verif_map.c \
+		$(DIR_PARSING)error_parsing.c \
 		$(DIR_DISPLAY)put_minimap.c \
 		$(DIR_DISPLAY)put_all_map.c \
 		$(DIR_DISPLAY)put_settings.c \
@@ -38,7 +39,7 @@ HEADER = cub3d.h
 
 DIR_OBJS = ./.objs/
 OBJS = $(patsubst %.c, $(DIR_OBJS)%.o, $(SRCS))
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 

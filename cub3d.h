@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/27 14:11:12 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:42:04 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,8 @@ void	put_recasting(t_cube *data, t_img *img);
 
 //put_line.c
 void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img);
+
+//error_parsing.c
+int		error_parsing(char *err, char *detail, int ret);
 
 #endif

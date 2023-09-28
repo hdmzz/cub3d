@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajakubcz <ajakubcz@42Lyon.fr>              +#+  +:+       +#+        */
+/*   By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:00:04 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/08/31 13:09:34 by ajakubcz         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:48:32 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		verif_around(char **cp_map, int y, int x, t_map *map);
 
 void	verif_map(t_cube *data)
 {
-	get_pos_perso(&data->map, &data->perso);
+	get_pos_perso(&data->map, &data->perso);//encore NSEW
 	verif_if_close(&data->map, &data->perso);
 }
 
@@ -30,20 +30,26 @@ void	get_pos_perso(t_map *map, t_perso *perso)
 {
 	int	x;
 	int	y;
+	int	count;
 
-	x = 0;
-	while (x < map->width)
+	x = -1;
+	count = 0;
+	while (++x < map->width)
 	{
-		y = 0;
-		while (y < map->height)
+		y = -1;
+		while (++y < map->height)
 		{
 			if (map->map[y][x] == 'N' || map->map[y][x] == 'S' || \
 				map->map[y][x] == 'E' || map->map[y][x] == 'W')
-				return (set_perso(perso, map->map[y][x], x, y));
-			y++;
+				{
+					set_perso(perso, map->map[y][x], x, y);
+					count++;
+				}
 		}
-		x++;
 	}
+	if (count > 1)
+		return (error_parsing("Too many player positions"), exit (1));//le exit
+		//faudra revoir free tout ce qu il ya a free
 	ft_printf("Error no perso on map\n");
 	exit(1);
 }
