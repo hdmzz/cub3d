@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:00:04 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/28 14:33:15 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:05:42 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	get_pos_perso(t_map *map, t_perso *perso)
 	if (count == 1)
 		return ;
 	if (count > 1)
-		return (error_parsing(ERR_PLAY_NUM, NULL, 1), exit (1));//le exit
-	ft_printf("Error no perso on map\n");
-	exit(1);
+		return (error_parsing(ERR_PLAY_NUM, NULL, 1), exit (1));
+	else if (count < 1)
+		return (error_parsing(NO_PLAY_ERR, NULL, 1), exit (1));
 }
 
 void	set_perso(t_perso *perso, char orientation, int x, int y)
@@ -78,7 +78,8 @@ void	verif_if_close(t_map *map, t_perso *perso)
 	x = 0;
 	cp_map = copy(map);
 	fill_map(cp_map, perso->pos[0], perso->pos[1], map);
-	//check_walls()
+	if (check_walls(cp_map, map->height) == 0)
+		exit(1);
 	print_map(cp_map);
 	while (x < map->width)
 	{

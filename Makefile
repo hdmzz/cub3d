@@ -6,7 +6,7 @@
 #    By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/29 17:26:09 by ajakubcz          #+#    #+#              #
-#    Updated: 2023/09/28 13:43:32 by hdamitzi         ###   ########.fr        #
+#    Updated: 2023/09/28 15:50:45 by hdamitzi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	$(DIR_SRCS)main.c \
 		$(DIR_SRCS)utils.c \
 		$(DIR_SRCS)utils_mlx.c \
 		$(DIR_PARSING)parse_file.c \
+		$(DIR_PARSING)parser.c \
 		$(DIR_PARSING)utils_parse.c \
 		$(DIR_PARSING)set_ressource.c \
 		$(DIR_PARSING)set_map.c \

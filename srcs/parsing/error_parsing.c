@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:29:41 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/09/28 13:46:58 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:08:20 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		error_parsing(char *err, char *detail, int ret)
 	}
 	if (detail)
 	{
-		ft_putstr_fd("/n", 2);
+		ft_putstr_fd("\n", 2);
 		ft_putstr_fd(detail, 2);
 	}
 	ft_putstr_fd("\n", 2);

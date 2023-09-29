@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:05:19 by ajakubcz          #+#    #+#             */
-/*   Updated: 2023/09/28 14:30:51 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:52:08 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define SIZE_TILE 100
 # define ERR_PLAY_NUM "Too many player positions"
+# define NO_PLAY_ERR "No player"
 
 # include <math.h>
 # include <fcntl.h> //open
@@ -172,5 +173,9 @@ void	put_line(int num_rayon, double dist ,t_cube *data, t_img *img);
 
 //error_parsing.c
 int		error_parsing(char *err, char *detail, int ret);
+
+//parser.c
+int		check_walls(char **map, int tab_len);
+
 
 #endif
